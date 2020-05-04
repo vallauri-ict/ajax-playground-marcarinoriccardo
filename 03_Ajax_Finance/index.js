@@ -109,6 +109,12 @@ function createRows(n) {
     tr.appendTo($("#table"));
 }
 
+document.getElementById("download").addEventListener('click', function(){
+    let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+    let a =  document.getElementById("download");
+    a.href = url_base64jp;
+});
+
 function random(min, max) {
     return Math.floor((max - min + 1) * Math.random()) + min;
 }
