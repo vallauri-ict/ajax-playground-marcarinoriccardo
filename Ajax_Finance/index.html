@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Ajax Finance</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="index.js"></script>
+	</head>
+	<style>
+		::-webkit-scrollbar {
+			display: none;
+		}
+		body{
+			background-color: lightgray;
+		}
+		select option { color: black; }
+		select option:first-child { color: grey; }
+		select.empty { color: grey; }
+	</style>
+	<body>
+		<div class="container-fluid" style="padding:0px;">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<select class="form-control" id="selSymbol" style="width: 250px;">
+					<option value="" selected>Select a symbol...</option>
+				</select>
+				<a href="" style="margin-left:30%; width:250px; color:whitesmoke; font-weight: bold; font-family: 'Agency FB'; font-size: 20pt; text-align: center">AJAX FINANCE</a>
+				<form class="form-inline" style="margin-left: 29%;">
+				  <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search...">
+				</form>
+			</nav>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="padding:0;">
+					<br>
+					<div id="quote">
+						<table class="table table-bordered table-striped" id="table">
+							<style>
+								th{ height: 60px; width:50px }
+								td{ height: 30px; width:50px }
+							</style>
+							<tr>
+								<th>Symbol</th>
+								<th>Last Trade</th>
+								<th>Last Trade Time</th>
+								<th>Change</th>
+								<th>Open</th>
+								<th>Previous Close</th>
+								<th>Day's Low</th>
+								<th>Day's High</th>
+								<th>Volume</th>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<p>Choose the sector:</p>
+						<select class="form-control" id="selSector">
+							<option value="" selected>Select a sector...</option>
+						</select>
+					</div>
+					<canvas id="myChart" width="600" height="400" style="margin-top: 20px"></canvas>
+					<a id="btnDownload" download="ChartImage.jpg" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px; margin-bottom:10%;" title="Download chart">
+						<i class="fa fa-download"></i>
+					</a>
+					<a id="btnUpload" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px; margin-bottom:10%; margin-left:86%;" title="Upload chart">
+						<i class="fa fa-upload"></i>
+					</a>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</div>
+	<div style="margin-top: 350px; border-top: 1px inset aliceblue; height: 70px; background-color: aliceblue">
+		<div style="float: right; margin-top: 20px; padding-right: 20px">Help: <a href = "mailto: r.marcarino.0814@vallauri.edu" title="Riccardo Marcarino">r.marcarino.0814@vallauri.edu</a></div>
+	</div>
+	</body>
+</html>
