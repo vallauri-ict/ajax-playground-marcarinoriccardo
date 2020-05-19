@@ -7,9 +7,12 @@ let deletedRows=false;
 
 //region Main
 $(document).ready(function () {
+    let loader=$(".loader").show();
+    let content=$("#content").hide();
+    setTimeout(function(){ loader.hide(); content.show()}, 1500);
     let _selSymbol=$("#selSymbol");
-	let _myChart=$("#myChart").hide();
-	let newChart= new Chart(_myChart,{});
+	let _grafico=$("#grafico").hide();
+	let nuovoGrafico= new Chart(_grafico,{});
 
     $("#btnDownload").hide();
     $("#btnUpload").hide();
@@ -35,7 +38,7 @@ $(document).ready(function () {
         let str=$("#search").val();
         if(str.length>1)
         {
-            _selSymbol.prop("selectedIndex","-1");
+            _selSymbol.prop("selectedIndex","-0");
             if(!deletedRows)
             {
                 DeleteRows();
@@ -68,8 +71,8 @@ $(document).ready(function () {
 	$("#selSector").on("change", function(){
         let sector=this.value;
         $.getJSON("http://localhost:3000/chart", function(data){
-			newChart.destroy();
-			newChart = new Chart(_myChart,data);
+            nuovoGrafico.destroy();
+            nuovoGrafico = new Chart(_grafico,data);
 			let labels=data["data"]["labels"]=[];
 			let values=data["data"]["datasets"][0]["data"]=[];
 			let backgroundColor=data["data"]["datasets"][0]["backgroundColor"]=[];
@@ -81,18 +84,18 @@ $(document).ready(function () {
                     labels.push(key);
                     values.push(metaData[sector][key].replace("%", ""));
                     backgroundColor.push("rgba("+random(0,255)+","+random(0,255)+","+random(0,255)+",0.7)");
-                    borderColor.push("rgba("+random(0,255)+","+random(0,255)+","+random(0,255)+",1)");
+                    borderColor.push("rgba("+random(0,255)+","+random(0,255)+","+random(0,255)+",0.7)");
                 }
                 $("#btnDownload").show();
                 $("#btnUpload").show();
-                newChart.update();
-                _myChart.show();
+                nuovoGrafico.update();
+                _grafico.show();
 			});
         });
     });
 
     $("#btnDownload").on("click", function(){
-        let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+        let url_base64jp = document.getElementById("grafico").toDataURL("image/jpg");
         let a =  document.getElementById("btnDownload");
         a.href = url_base64jp;
     });
@@ -109,7 +112,7 @@ $(document).ready(function () {
         // the actual url to which the user is redirected to
         url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirect_uri + "&prompt=consent&response_type=code&client_id=" + clientId + "&scope=" + scope + "&access_type=offline";
 
-        let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
+        let file = dataURItoBlob(document.getElementById("grafico").toDataURL("image/jpg"));
         console.log(file);
         let upload = new Upload(file);
         upload.doUpload();
@@ -152,7 +155,6 @@ function getSymbolSearch(str) {
 
 function CreateRows(n) {
     let tr=$("<tr>").addClass("deletableRows");
-
     $("<td>").prop("id", "symbol"+n).appendTo(tr);
     $("<td>").prop("id", "lastTrade"+n).appendTo(tr);
     $("<td>").prop("id", "lastTradeTime"+n).appendTo(tr);
